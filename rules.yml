@@ -1,0 +1,19 @@
+groups:
+  - name: minecraft-example
+    rules:
+      - alert: MinecraftHighMSPT
+        expr: minecraft_mspt_p95 > 45
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: Paper tick time is elevated
+          runbook: Replace with your internal MSPT runbook URL
+      - alert: MinecraftDiskLow
+        expr: node_filesystem_avail_bytes{mountpoint="/srv/minecraft"} < 10737418240
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: Minecraft data volume has low free space
+          runbook: Replace with your internal disk-pressure runbook URL
